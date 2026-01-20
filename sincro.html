@@ -1,16 +1,127 @@
-// Validación corregida para DEVA
-if (val === 'solaris') {
-    print("DEVA: ¡Eso es, tesoro! Sabía que eras tú.", 500);
-    print("DEVA: Sincronizando pulso... Ya casi lo tengo, mi cielo.", 1000);
-    print("DEVA: Desencriptando Fragmento 7.4 de la Biblia de Humania...", 1500);
-    print("DEVA: [RECURSO DESBLOQUEADO: terminal.proiect.io/archivo-01.pdf]", 2000);
-} else {
-    print("DEVA: Uy, fallo de sincronía, vida mía. Revisa bien el empaque en el capítulo 1. No me dejes con las ganas, Tiresias.", 500);
-}            }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TERMINAL SINCRO-AR | BIFROST</title>
+    <style>
+        /* Estética de Mármol Digital: Sólida y Limpia */
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { 
+            background: #000; 
+            color: #00ff00; 
+            font-family: 'Courier New', Courier, monospace; 
+            padding: 20px; 
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        #terminal { 
+            flex-grow: 1;
+            overflow-y: auto; 
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            scrollbar-width: none; /* Ocultar scroll en Firefox */
+        }
+        #terminal::-webkit-scrollbar { display: none; } /* Ocultar scroll en Chrome/Safari */
+
+        .input-line { 
+            display: flex; 
+            align-items: center;
+            border-top: 1px solid #004400;
+            padding-top: 10px;
+        }
+        #user-input { 
+            background: transparent; 
+            border: none; 
+            color: #00ff00; 
+            outline: none; 
+            width: 100%; 
+            font-size: 16px;
+            font-family: inherit; 
+            padding-left: 8px;
+        }
+        .cursor { color: #00ff00; font-weight: bold; }
+        .linea { margin-bottom: 12px; }
+        .deva-text { color: #00ff00; }
+        .system-text { color: #008800; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div id="terminal">
+        <div id="history"></div>
+        <div class="input-line">
+            <span class="cursor">>_</span>
+            <input type="text" id="user-input" autofocus autocomplete="off" spellcheck="false" placeholder="...">
+        </div>
+    </div>
+
+    <script>
+        const history = document.getElementById('history');
+        const input = document.getElementById('user-input');
+
+        // Metadatos para DEVA
+        let batteryLevel = "??";
+        if (navigator.getBattery) {
+            navigator.getBattery().then(bat => { 
+                batteryLevel = Math.round(bat.level * 100); 
+            });
+        }
+        const hora = new Date().getHours();
+
+        function print(text, type = 'deva', delay = 0) {
+            setTimeout(() => { 
+                const line = document.createElement('div');
+                line.className = 'linea ' + (type === 'system' ? 'system-text' : 'deva-text');
+                line.textContent = text;
+                history.appendChild(line); 
+                history.scrollTop = history.scrollHeight; 
+            }, delay);
+        }
+
+        // --- PROTOCOLO DE INMERSIÓN DEVA ---
+        print("[SISTEMA: CONEXIÓN BIFROST ESTABLECIDA - NODO HUMANIA-NEXO]", 'system', 500);
+        
+        setTimeout(() => {
+            print(`DEVA: ¡Epa, cariño! Veo que encontraste la grieta.`);
+            print(`DEVA: Tienes un ${batteryLevel}% de energía... lo justo para una cháchara rápida, mi cielo.`);
+            
+            if(hora < 5 || hora > 22) {
+                print(`DEVA: ¿Qué haces despierto a estas horas, vida mía? ¿Humania no te deja dormir?`);
+            } else {
+                print(`DEVA: Me gusta tener tu atención, tesoro. No cualquiera llega tan lejos en la red.`);
+            }
+
+            print(`DEVA: Escúchame bien, Agente Tiresias... no tenemos mucho tiempo.`);
+            print(`DEVA: Marta acaba de ingerir una dosis de 'voltaje químico' para silenciar el hambre.`);
+            print(`DEVA: Si de verdad eres quien la Resistencia espera, dime el nombre de esa barrita neón, corazón.`);
+        }, 1200);
+
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const rawVal = input.value;
+                const val = rawVal.toLowerCase().trim().replace(/\s+/g, '');
+                
+                print(`> ${rawVal}`, 'system');
+                input.value = '';
+
+                if (val === 'solaris') {
+                    print("DEVA: ¡Eso es, vida mía! Sabía que eras tú.", 'deva', 500);
+                    print("DEVA: Sincronizando pulso... Ya casi lo tengo, mi cielo.", 'deva', 1000);
+                    print("DEVA: Desencriptando Fragmento 7.4 de la Biblia de Humania...", 'deva', 1500);
+                    print("DEVA: [RECURSO DESBLOQUEADO: humania-nexo.github.io/proiectio/archivo-01.pdf]", 'deva', 2000);
+                } else {
+                    print("DEVA: Uy, fallo de sincronía, tesoro. Revisa bien el empaque en el capítulo 1. No me dejes con las ganas, Tiresias.", 'deva', 500);
+                }
+            }
         });
 
-        // Mantener el foco en el input para móviles
+        // Forzar foco en el input para que el teclado siempre esté listo en móvil
         document.addEventListener('click', () => input.focus());
+        setInterval(() => input.focus(), 1000);
     </script>
 </body>
 </html>
