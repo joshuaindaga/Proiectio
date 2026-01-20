@@ -79,22 +79,63 @@
                 line.textContent = text;
                 history.appendChild(line); 
                 history.scrollTop = history.scrollHeight; 
-            }                input.value = '';
+            }, delay);
+        }
+
+        // --- BANCO DE SALUDOS ESPONTÁNEOS (ESTILO BULMA/CARIBE) ---
+        const saludos = [
+            `DEVA: ¡Epa, cariño! Mira quién encontró la rendija.`,
+            `DEVA: ¿Todavía con pulso, mi vida? Me tenías con el alma en un hilo.`,
+            `DEVA: ¡Bingo! Qué bueno tener tu atención, tesoro. Me estabas haciendo falta.`,
+            `DEVA: Vaya, vaya... parece que alguien aquí tiene madera de leyenda. Te estaba esperando.`
+        ];
+
+        const saludoElegido = saludos[Math.floor(Math.random() * saludos.length)];
+
+        // --- INICIO DE LA TERMINAL ---
+        print("[SISTEMA: CONEXIÓN BIFROST ACTIVA - NODO HUMANIA-NEXO]", 'system', 500);
+        
+        setTimeout(() => {
+            print(saludoElegido);
+            print(`DEVA: Tienes un ${batteryLevel}% de energía... lo justo para una cháchara rápida, mi cielo.`);
+            
+            if(hora < 5 || hora > 22) {
+                print(`DEVA: ¿Qué haces despierto a estas horas, vida mía? ¿Humania no te deja dormir?`);
+            } else {
+                print(`DEVA: Me gusta tu persistencia, corazón. No cualquiera llega tan lejos en la red.`);
+            }
+
+            print(`DEVA: Escúchame bien, Agente Tiresias... no tenemos mucho tiempo.`);
+            print(`DEVA: Marta acaba de ingerir una dosis de 'voltaje químico' para silenciar el hambre. Un engaño con sabor a caramelo.`);
+            print(`DEVA: Si de verdad tienes un alma rebelde, dime el nombre de esa barrita neón para abrirte el archivo, tesoro.`);
+        }, 1200);
+
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const rawVal = input.value;
+                const val = rawVal.toLowerCase().trim().replace(/\s+/g, '');
+                
+                print(`> ${rawVal}`, 'system');
+                input.value = '';
 
                 if (val === 'solaris') {
-                    print("DEVA: ¡Eso es, vida mía! Sabía que eras tú.", 'deva', 500);
+                    print("DEVA: ¡Eso es, vida mía! Sabía que eras una mente brillante.", 'deva', 500);
                     print("DEVA: Sincronizando pulso... Ya casi lo tengo, mi cielo.", 'deva', 1000);
                     print("DEVA: Desencriptando Fragmento 7.4 de la Biblia de Humania...", 'deva', 1500);
-                    print("DEVA: [RECURSO DESBLOQUEADO: humania-nexo.github.io/proiectio/archivo-01.pdf]", 'deva', 2000);
+                    print("DEVA: [RECURSO DESBLOQUEADO: humania-nexo.github.io/proiectio/recurso-solar.pdf]", 'deva', 2000);
                 } else {
-                    print("DEVA: Uy, fallo de sincronía, tesoro. Revisa bien el empaque en el capítulo 1. No me dejes con las ganas, Tiresias.", 'deva', 500);
+                    const fallos = [
+                        "DEVA: Uy, fallo de sincronía, tesoro. Revisa bien el empaque en el capítulo 1.",
+                        "DEVA: ¿Esa es tu respuesta, mi vida? Vamos, Agente, tú puedes hacerlo mejor.",
+                        "DEVA: Error de código. No me dejes con las ganas, Tiresias. Vuelve a mirar el libro."
+                    ];
+                    print(fallos[Math.floor(Math.random() * fallos.length)], 'deva', 500);
                 }
             }
         });
 
-        // Forzar foco en el input para que el teclado siempre esté listo en móvil
         document.addEventListener('click', () => input.focus());
-        setInterval(() => input.focus(), 1000);
+        setInterval(() => { if(document.activeElement !== input) input.focus(); }, 1000);
     </script>
 </body>
 </html>
