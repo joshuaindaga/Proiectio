@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Humania Corp | Un Mañana Sin Sombras</title>
     <style>
-        :root { --cian: #00c3ff; --blanco: #ffffff; --gris-claro: #f5f5f7; --texto: #1d1d1f; --rojo: #ff4d4d; }
+        :root { --cian: #00c3ff; --blanco: #ffffff; --gris-claro: #f5f5f7; --texto: #1d1d1f; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; transition: all 0.5s ease; }
         body { background-color: var(--blanco); color: var(--texto); overflow-x: hidden; }
         
@@ -13,27 +13,31 @@
         header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; background: rgba(255,255,255,0.9); position: sticky; top: 0; z-index: 100; }
         .logo { font-weight: bold; letter-spacing: 2px; color: var(--cian); }
 
-        /* Hero */
+        /* Hero Section */
         .hero { padding: 60px 20px; text-align: center; background: var(--gris-claro); }
         .hero img { width: 100%; max-width: 800px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         .hero h1 { font-size: 2.2rem; font-weight: 300; margin-bottom: 15px; }
 
-        /* Login Form (La Trampa) */
+        /* Sección Pilares (Solaris y Sueño) */
+        .section-pilares { padding: 40px 20px; max-width: 1000px; margin: 0 auto; }
+        .grid-pilares { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .pilar-card { background: var(--gris-claro); padding: 20px; border-radius: 20px; text-align: center; }
+        .pilar-card img { width: 100%; border-radius: 15px; margin-bottom: 15px; object-fit: cover; aspect-ratio: 1/1; }
+        .pilar-card h3 { margin-bottom: 10px; color: var(--cian); }
+
+        /* Login Form */
         .login-section { padding: 40px 20px; max-width: 400px; margin: 0 auto; text-align: center; }
         input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; background: var(--gris-claro); }
         .btn-login { width: 100%; padding: 12px; background: var(--texto); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .btn-login:hover { background: #000; }
 
-        /* Catalogo Submundos */
-        .submundos { background: #111; color: #fff; padding: 40px 20px; text-align: center; }
+        /* Submundos */
+        .submundos { background: #111; color: #fff; padding: 60px 20px; text-align: center; }
         .scroll-container { display: flex; overflow-x: auto; gap: 20px; padding: 20px 0; scrollbar-width: none; }
         .sub-card { min-width: 250px; background: #1a1a1a; padding: 20px; border-radius: 15px; border: 1px solid #333; }
 
-        /* Footer y Secreto */
+        /* Footer */
         footer { padding: 40px 20px; text-align: center; font-size: 0.7rem; color: #aaa; }
-        .secret-link { color: #f0f0f0; text-decoration: none; cursor: default; opacity: 0.3; }
-        
-        /* Efecto Matrix */
+        .secret-link { color: #f0f0f0; text-decoration: none; cursor: default; opacity: 0.1; }
         .matrix-collapse { background: #000 !important; color: #0f0 !important; filter: brightness(1.5) contrast(2); }
     </style>
 </head>
@@ -44,12 +48,35 @@
         <div style="font-size: 0.7rem; color: #aaa;">RED A.N.I.M.A. ONLINE</div>
     </header>
 
+    <!-- 1. BANNER PRINCIPAL (HERO) -->
     <section class="hero">
-        <img src="https://joshuaindaga.github.io/proiectio/hero.jpg" alt="Sincronía">
+        <img src="multimedia/hero.jpg" alt="Sincronía Humana">
         <h1>Un Mañana Sin Sombras</h1>
         <p>Optimiza tu existencia. El descanso es el motor de la nueva humanidad.</p>
     </section>
 
+    <!-- 2. SECCIÓN DE PILARES (AQUÍ ESTÁN LOS OTROS CONTENEDORES) -->
+    <section class="section-pilares">
+        <div class="grid-pilares">
+            
+            <!-- CONTENEDOR SOLARIS -->
+            <div class="pilar-card">
+                <img src="multimedia/solaris.jpg" alt="Barra Solaris">
+                <h3>Nutrición de Diseño</h3>
+                <p>Solaris: Voltaje puro para tu día operativo. La energía que tu ADN merece.</p>
+            </div>
+
+            <!-- CONTENEDOR SUEÑO (PROIECTIO) -->
+            <div class="pilar-card">
+                <img src="multimedia/sueño.jpg" alt="Sincronía REM">
+                <h3>Sincronía REM</h3>
+                <p>Optimiza tu descanso. Vive tus sueños en entornos de alta fidelidad.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3. FORMULARIO DE LOGIN (LA TRAMPA) -->
     <section class="login-section">
         <h3>ACCESO DE USUARIO</h3>
         <p style="font-size: 0.8rem; margin-bottom: 10px;">Ingrese sus credenciales de Nivel 7</p>
@@ -60,6 +87,7 @@
         </form>
     </section>
 
+    <!-- 4. CATÁLOGO DE SUBMUNDOS -->
     <section class="submundos">
         <h2>Catálogo de Inmersión</h2>
         <div class="scroll-container">
@@ -67,6 +95,7 @@
             <div class="sub-card"><h4>Coliseo Etérico</h4><p>Forja tu leyenda.</p></div>
             <div class="sub-card"><h4>Beso Prohibido</h4><p>Vence al tiempo.</p></div>
             <div class="sub-card"><h4>Neon Nirvana</h4><p>Placer puro.</p></div>
+            <div class="sub-card"><h4>Chronos</h4><p>La historia en tu piel.</p></div>
         </div>
     </section>
 
@@ -74,50 +103,39 @@
         <p>&copy; 202X Humania Corp. Todos los derechos reservados.</p>
         <p>Sujeto a Protocolo de Paz Preventiva.</p>
         <br>
-        <!-- EL ENLACE MATRIX -->
         <a href="#" id="matrix-trigger" class="secret-link">Error_v.0.8_sincronia_caotica_detectada</a>
     </footer>
 
     <script>
-        // --- 1. LÓGICA DE LA TRAMPA (LOGIN) ---
+        // Lógica de la Trampa
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            window.location.href = "seguridad.html"; // Manda a la pantalla de pánico
+            window.location.href = "seguridad.html";
         });
 
-        // --- 2. LÓGICA MATRIX (CLICK SECRETO) ---
+        // Lógica Matrix
         document.getElementById('matrix-trigger').addEventListener('click', function(e) {
             e.preventDefault();
             document.getElementById('main-body').classList.add('matrix-collapse');
-            setTimeout(() => {
-                window.location.href = "sincro.html?nodo=login";
-            }, 1500);
+            setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 1500);
         });
 
-        // --- 3. LÓGICA KINÉTICA (AGITAR MÓVIL) ---
+        // Lógica de Movimiento
+        let lastUpdate = 0;
         let lastX, lastY, lastZ;
-        let moveCounter = 0;
-
         window.addEventListener('devicemotion', function(event) {
             let acceleration = event.accelerationIncludingGravity;
             let curTime = new Date().getTime();
-            
             if ((curTime - lastUpdate) > 100) {
                 let diffTime = curTime - lastUpdate;
                 lastUpdate = curTime;
-
                 let speed = Math.abs(acceleration.x + acceleration.y + acceleration.z - lastX - lastY - lastZ) / diffTime * 10000;
-
-                if (speed > 800) { // Umbral de agitación fuerte
-                    document.body.style.backgroundColor = "#0f0";
-                    setTimeout(() => { window.location.href = "sincro.html?nodo=motion"; }, 500);
+                if (speed > 1000) { 
+                    window.location.href = "sincro.html?nodo=motion";
                 }
-                lastX = acceleration.x;
-                lastY = acceleration.y;
-                lastZ = acceleration.z;
+                lastX = acceleration.x; lastY = acceleration.y; lastZ = acceleration.z;
             }
-        }, false);
-        let lastUpdate = 0;
+        });
     </script>
 </body>
 </html>
