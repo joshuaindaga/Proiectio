@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ALERTA DE SEGURIDAD | HUMANIA CORP</title>
+    <style>
+        body { 
+            background-color: #000; 
+            color: #ff0000; 
+            font-family: 'Courier New', Courier, monospace; 
+            margin: 0; 
+            padding: 20px; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden;
+            border: 5px solid #ff0000;
+            animation: pulse-border 1.5s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% { border-color: #ff0000; }
+            50% { border-color: #330000; }
+            100% { border-color: #ff0000; }
+        }
+
+        #alert-header { text-align: center; border-bottom: 2px solid #ff0000; padding-bottom: 10px; margin-bottom: 20px; }
+        #terminal { flex-grow: 1; font-size: 14px; line-height: 1.6; }
+        .critical { font-weight: bold; text-transform: uppercase; background: #ff0000; color: #000; padding: 2px 5px; }
+        .glitch-text { animation: glitch 0.2s infinite; }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="alert-header">
+        <h1 class="glitch-text">VIOLACIÓN DE PROTOCOLO DETECTADA</h1>
+        <p>SISTEMA CENTRAL DE SEGURIDAD (VANCE-CORE)</p>
+    </div>
+
+    <div id="terminal">
+        <div id="log"></div>
+    </div>
+
+    <script>
+        const log = document.getElementById('log');
+        const userAgent = navigator.userAgent;
+        let device = "Desconocido";
+
+        // Detección simple de dispositivo
+        if (userAgent.match(/Android/i)) device = "Dispositivo Móvil Android";
+        else if (userAgent.match(/iPhone/i)) device = "Apple Mobile Device (iP)";
+        else device = "Estación de Trabajo Fija (PC/Mac)";
+
+        function addLog(text, isCritical = false, delay = 0) {
+            setTimeout(() => {
+                const p = document.createElement('p');
+                if(isCritical) p.className = 'critical';
+                p.innerHTML = text;
+                log.appendChild(p);
+                window.scrollTo(0, document.body.scrollHeight);
+            }, delay);
+        }
+
+        addLog("> INICIANDO RASTREO BIOMÉTRICO...", false, 500);
+        addLog("> ACCESO NO AUTORIZADO A ARCHIVOS DE NIVEL 7.", false, 1000);
+        addLog(`> IDENTIFICANDO HARDWARE: <span style="color:white">${device}</span>`, false, 1500);
+
+        // --- Obtención de IP y Ubicación Real ---
+        fetch('https://ipapi.co/json/')
+            .then(res => res.json())
+            .then(data => {
+                addLog(`> DIRECCIÓN IP LOCALIZADA: <span style="color:white">${data.ip}</span>`, true, 2000);
+                addLog(`> NODO DE ORIGEN: <span style="color:white">${data.city}, ${data.country_name}</span>`, true, 2500);
+                addLog(`> PROVEEDOR DE RED: <span style="color:white">${data.org}</span>`, false, 3000);
+                addLog("> ---", false, 3500);
+                addLog("> ENVIANDO COORDENADAS A LA GUARDIA CIVIL...", false, 4000);
+                addLog("> UNIDAD DE RESPUESTA RÁPIDA (U.R.R.) DESPLEGADA.", true, 4500);
+                addLog(`> TIEMPO ESTIMADO DE INTERVENCIÓN EN ${data.city.toUpperCase()}: 4 MINUTOS.`, false, 5000);
+                addLog("> ADVERTENCIA: LA RECALIBRACIÓN NEURONAL ES OBLIGATORIA.", true, 6000);
+                addLog("> NO CIERRE ESTA VENTANA. LA RESISTENCIA ES INÚTIL.", false, 7000);
+            })
+            .catch(() => {
+                addLog("> ERROR EN EL RASTREO: BLOQUEO DE PRIVACIDAD DETECTADO.", true, 2000);
+                addLog("> ACTIVANDO PROTOCOLO DE FUERZA BRUTA...", false, 2500);
+            });
+    </script>
+</body>
+</html>
