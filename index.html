@@ -6,39 +6,41 @@
     <title>PROIECTIO | El Futuro del Sueño</title>
     <style>
         :root { --cian: #00c3ff; --blanco: #ffffff; --gris-claro: #f5f5f7; --texto: #1d1d1f; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
-        body { background-color: var(--blanco); color: var(--texto); overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--blanco); color: var(--texto); overflow-x: hidden; user-select: none; }
 
         header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: rgba(255,255,255,0.9); z-index: 100; backdrop-filter: blur(10px); }
         .logo { font-weight: bold; letter-spacing: 4px; color: var(--texto); font-size: 1rem; }
 
-        /* --- ESTILO DE SLIDERS INTERACTIVOS --- */
-        .slider-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; }
-        .slide-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
-        .slide-item { min-width: 100%; position: relative; text-decoration: none; color: inherit; }
-        .slide-item img { width: 100%; height: auto; display: block; }
+        /* --- CONTENEDOR DE SLIDER TÁCTIL --- */
+        .slider-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; cursor: grab; touch-action: pan-y; }
+        .slider-wrapper:active { cursor: grabbing; }
+        .slide-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
+        .slide-item { min-width: 100%; position: relative; text-decoration: none; color: inherit; pointer-events: none; }
+        .slide-item img { width: 100%; height: auto; display: block; -webkit-user-drag: none; }
         
-        .label-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: #fff; padding: 50px 20px 30px; text-align: left; }
+        /* Overlay de texto */
+        .label-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: #fff; padding: 50px 20px 30px; text-align: left; pointer-events: none; }
         .label-overlay h3 { color: var(--cian); font-size: 1.5rem; margin-bottom: 5px; }
         
-        /* Puntos de navegación (Bullets) */
-        .dots-container { position: absolute; bottom: 15px; width: 100%; display: flex; justify-content: center; gap: 8px; z-index: 10; }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s; }
-        .dot.active { background: var(--cian); transform: scale(1.3); }
+        /* Bullets */
+        .dots-container { position: absolute; bottom: 15px; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 10; pointer-events: auto; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s; }
+        .dot.active { background: var(--cian); transform: scale(1.4); }
 
         .section-title { padding: 60px 20px 20px; text-align: center; }
         .section-title h2 { font-weight: 200; font-size: 2.2rem; letter-spacing: -1px; }
 
-        /* --- HERO & SECCIONES --- */
+        /* Estilo Hero */
         .hero-link { display: block; text-decoration: none; background: var(--gris-claro); }
         .hero-link img { width: 100%; height: auto; display: block; }
 
-        /* Mite Chat Widget */
+        /* Mite Chat */
         #mite-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
         #mite-bubble { width: 65px; height: 65px; cursor: pointer; filter: drop-shadow(0 5px 15px rgba(0,195,255,0.3)); }
-        #chat-window { position: fixed; bottom: 95px; right: 20px; width: 280px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: none; flex-direction: column; overflow: hidden; border: 1px solid #eee; }
+        #chat-window { position: fixed; bottom: 95px; right: 20px; width: 280px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: none; flex-direction: column; overflow: hidden; border: 1px solid #eee; text-align: left; }
         .chat-header { background: var(--cian); color: white; padding: 12px; font-weight: bold; font-size: 0.8rem; display: flex; justify-content: space-between; }
-        .chat-body { height: 250px; overflow-y: auto; padding: 15px; font-size: 0.8rem; }
+        .chat-body { height: 250px; overflow-y: auto; padding: 15px; font-size: 0.8rem; color: #333; }
         .mite-msg { background: #f0f0f5; padding: 8px; border-radius: 12px 12px 12px 0; margin-bottom: 10px; }
         .opt-btn { background: #fff; border: 1px solid var(--cian); color: var(--cian); padding: 5px 10px; border-radius: 10px; font-size: 0.7rem; cursor: pointer; margin: 2px; }
 
@@ -53,82 +55,60 @@
         <div style="font-size: 0.6rem; color: var(--cian); border: 1px solid var(--cian); padding: 2px 5px;">A.N.I.M.A. SINCRO: ON</div>
     </header>
 
-    <!-- FASE 1: HERO (LA PROMESA) - Todo el Hero es un enlace -->
-    <a href="#" class="hero-link">
+    <!-- FASE 1: HERO -->
+    <section class="hero-link">
         <img src="multimedia/hero.jpg" alt="Un Mañana Sin Sombras">
         <div style="padding: 40px 20px; text-align: center;">
             <h1 style="font-weight: 200; color: #1d1d1f;">Un Mañana Sin Sombras</h1>
-            <p style="color: #86868b;">Toque para conocer la historia de la Sincronía.</p>
+            <p style="color: #86868b;">Bienvenido a la Era de la Sincronía.</p>
         </div>
-    </a>
+    </section>
 
-    <!-- FASE 2: CATÁLOGO DE ADICCIÓN (SUBMUNDOS) -->
+    <!-- FASE 2: CATÁLOGO DE ADICCIÓN -->
     <div class="section-title">
         <h2>Ecosistemas de Inmersión</h2>
-        <p style="color: #86868b;">Seleccione su destino de hoy.</p>
+        <p style="color: #86868b;">Seleccione su destino.</p>
     </div>
-    <div class="slider-wrapper" id="slider-catalog">
+    <div class="slider-wrapper" id="wrapper-catalog">
         <div class="slide-track" id="catalog-track">
-            <!-- Cada slide es un enlace interactivo -->
-            <a href="#" class="slide-item">
-                <img src="multimedia/Olympus.jpeg" alt="Olympus V-Games">
-                <div class="label-overlay"><h3>Olympus V-Games</h3><p>Redefina su potencial biológico.</p></div>
-            </a>
-            <a href="#" class="slide-item">
-                <img src="multimedia/arcadia.jpg" alt="Arcadia Eterna">
-                <div class="label-overlay"><h3>Arcadia Eterna</h3><p>La pureza que la historia nos arrebató.</p></div>
-            </a>
-            <a href="#" class="slide-item">
-                <img src="multimedia/elbeso.jpg" alt="El Beso Prohibido">
-                <div class="label-overlay"><h3>El Beso Prohibido</h3><p>Donde los adioses no existen.</p></div>
-            </a>
-            <a href="#" class="slide-item">
-                <img src="multimedia/neon.png" alt="Neon Nirvana">
-                <div class="label-overlay"><h3>Neon Nirvana</h3><p>Sensaciones puras bajo vigilancia.</p></div>
-            </a>
-            <a href="#" class="slide-item">
-                <img src="multimedia/chronos.png" alt="Chronos">
-                <div class="label-overlay"><h3>Chronos</h3><p>La historia grabada en su piel.</p></div>
-            </a>
+            <div class="slide-item"><img src="multimedia/Olympus.jpeg"><div class="label-overlay"><h3>Olympus V-Games</h3><p>Redefina su potencial biológico.</p></div></div>
+            <div class="slide-item"><img src="multimedia/arcadia.jpg"><div class="label-overlay"><h3>Arcadia Eterna</h3><p>La pureza original.</p></div></div>
+            <div class="slide-item"><img src="multimedia/elbeso.jpg"><div class="label-overlay"><h3>El Beso Prohibido</h3><p>Vence al tiempo.</p></div></div>
+            <div class="slide-item"><img src="multimedia/neon.jpg"><div class="label-overlay"><h3>Neon Nirvana</h3><p>Sensaciones puras.</p></div></div>
+            <div class="slide-item"><img src="multimedia/chronos.jog"><div class="label-overlay"><h3>Chronos</h3><p>La historia en su piel.</p></div></div>
         </div>
         <div class="dots-container" id="catalog-dots"></div>
     </div>
 
-    <!-- FASE 3: CICLO DE RECARGA (SOLARIS / VELVET) -->
+    <!-- FASE 3: CICLO DE RECARGA -->
     <div class="section-title">
         <h2>Ciclo de Recarga</h2>
-        <p style="color: #86868b;">Combustible biológico de Nivel 7.</p>
+        <p style="color: #86868b;">Combustible biológico.</p>
     </div>
-    <div class="slider-wrapper" id="slider-nutri">
+    <div class="slider-wrapper" id="wrapper-nutri">
         <div class="slide-track" id="nutri-track">
-            <a href="#" class="slide-item">
-                <img src="multimedia/solaris-web.png" alt="Solaris">
-                <div class="label-overlay"><h3>FASE DIURNA: SOLARIS</h3><p>Voltaje puro para su jornada.</p></div>
-            </a>
-            <a href="#" class="slide-item">
-                <img src="multimedia/velvet-web.png" alt="Velvet">
-                <div class="label-overlay"><h3>FASE NOCTURNA: VELVET</h3><p>El interruptor definitivo del descanso.</p></div>
-            </a>
+            <div class="slide-item"><img src="multimedia/solaris-web.png"><div class="label-overlay"><h3>FASE DIURNA: SOLARIS</h3><p>Voltaje puro.</p></div></div>
+            <div class="slide-item"><img src="multimedia/velvet-web.png"><div class="label-overlay"><h3>FASE NOCTURNA: VELVET</h3><p>Reinicio profundo.</p></div></div>
         </div>
         <div class="dots-container" id="nutri-dots"></div>
     </div>
 
-    <!-- FASE 4: MECANICA SUEÑO (FINAL) -->
+    <!-- FASE 4: SUEÑO REM -->
     <div class="section-title"><h2>Sincronía REM</h2></div>
-    <a href="#" class="hero-link" onclick="window.location.href='seguridad.html'">
-        <img src="multimedia/sueño.jpg" alt="Sincronía REM">
+    <div style="cursor:pointer" onclick="window.location.href='seguridad.html'">
+        <img src="multimedia/sueño.jpg" style="width: 100%; height: auto;">
         <div style="padding: 40px 20px; text-align: center; background: #f5f5f7;">
-            <p style="color: #666; max-width: 600px; margin: 0 auto 20px;">Habite sus deseos mientras su cuerpo alcanza la eficiencia total.</p>
-            <button style="padding: 15px 40px; background: #000; color: #fff; border: none; font-size: 0.8rem; letter-spacing: 2px; cursor: pointer;">CONECTAR</button>
+            <p style="color: #666; margin-bottom: 20px;">Habite sus deseos mientras su cuerpo descansa.</p>
+            <button style="padding: 15px 40px; background: #000; color: #fff; border: none; font-size: 0.8rem; letter-spacing: 2px;">CONECTAR</button>
         </div>
-    </a>
+    </div>
 
     <!-- WIDGET MITE -->
     <div id="mite-widget">
         <div id="chat-window">
-            <div class="chat-header"><span>MITE Virtual Assistant</span><span onclick="toggleChat()" style="cursor:pointer">✕</span></div>
+            <div class="chat-header"><span>MITE Assistant</span><span onclick="toggleChat()" style="cursor:pointer">✕</span></div>
             <div class="chat-body" id="chat-log">
-                <div class="mite-msg">¡Zashoom! Soy Mite. ¿Quieres comprar Fragmentos de Éter? ¡Ding-Pum! 💎</div>
+                <div class="mite-msg">¡Zashoom! Soy Mite. ¿Necesitas Fragmentos de Éter? ¡Ding-Pum! 💎</div>
             </div>
             <div style="padding: 10px; border-top: 1px solid #eee;">
                 <button class="opt-btn" onclick="miteDice('sincronia')">Sincronía</button>
@@ -140,42 +120,105 @@
 
     <footer>
         <p>&copy; 202X HUMANIA GLOBAL SYSTEMS. "VOLUNTAS PRO PACE".</p>
-        <a href="#" id="matrix-trigger" class="secret-link">Error_v.0.8_sincronia_caotica_detectada</a>
+        <a href="#" id="matrix-trigger" class="secret-link">Error_v.0.8_sincronia_caotica</a>
     </footer>
 
     <script>
-        // --- LÓGICA DE CONTROL DE SLIDERS ---
-        function initSlider(trackId, dotsId, count) {
+        // --- MOTOR KINÉTICO DE SLIDERS (TOUCH & DRAG) ---
+        function createSlider(wrapperId, trackId, dotsId, count) {
+            const wrapper = document.getElementById(wrapperId);
             const track = document.getElementById(trackId);
             const dotsContainer = document.getElementById(dotsId);
             let index = 0;
+            let startX = 0;
+            let currentTranslate = 0;
+            let prevTranslate = 0;
+            let animationID = 0;
+            let isDragging = false;
 
-            // Crear los puntos (dots)
+            // Crear Dots
             for (let i = 0; i < count; i++) {
                 const dot = document.createElement('div');
                 dot.className = 'dot' + (i === 0 ? ' active' : '');
-                dot.onclick = () => { goToSlide(i); };
+                dot.addEventListener('click', () => { index = i; setPositionByIndex(); });
                 dotsContainer.appendChild(dot);
             }
 
-            function goToSlide(n) {
-                index = n;
-                track.style.transform = `translateX(-${index * 100}%)`;
+            // Eventos Touch/Mouse
+            wrapper.addEventListener('touchstart', touchStart(index));
+            wrapper.addEventListener('touchend', touchEnd);
+            wrapper.addEventListener('touchmove', touchMove);
+            wrapper.addEventListener('mousedown', touchStart(index));
+            wrapper.addEventListener('mouseup', touchEnd);
+            wrapper.addEventListener('mouseleave', touchEnd);
+            wrapper.addEventListener('mousemove', touchMove);
+
+            function touchStart(idx) {
+                return function(event) {
+                    isDragging = true;
+                    startX = getPositionX(event);
+                    animationID = requestAnimationFrame(animation);
+                }
+            }
+
+            function touchMove(event) {
+                if (isDragging) {
+                    const currentX = getPositionX(event);
+                    currentTranslate = prevTranslate + currentX - startX;
+                }
+            }
+
+            function touchEnd() {
+                isDragging = false;
+                cancelAnimationFrame(animationID);
+                const movedBy = currentTranslate - prevTranslate;
+
+                if (movedBy < -100 && index < count - 1) index += 1;
+                if (movedBy > 100 && index > 0) index -= 1;
+
+                setPositionByIndex();
+            }
+
+            function getPositionX(event) {
+                return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+            }
+
+            function animation() {
+                setSliderPosition();
+                if (isDragging) requestAnimationFrame(animation);
+            }
+
+            function setSliderPosition() {
+                track.style.transform = `translateX(${currentTranslate}px)`;
+            }
+
+            function setPositionByIndex() {
+                currentTranslate = index * -wrapper.offsetWidth;
+                prevTranslate = currentTranslate;
+                track.style.transform = `translateX(${currentTranslate}px)`;
+                updateDots();
+            }
+
+            function updateDots() {
                 const dots = dotsContainer.querySelectorAll('.dot');
                 dots.forEach((d, i) => d.className = 'dot' + (i === index ? ' active' : ''));
             }
 
-            // Auto-deslizar cada 6 segundos
+            window.addEventListener('resize', setPositionByIndex);
+
+            // Auto-deslizar
             setInterval(() => {
-                index = (index + 1) % count;
-                goToSlide(index);
+                if (!isDragging) {
+                    index = (index + 1) % count;
+                    setPositionByIndex();
+                }
             }, 6000);
         }
 
-        // Inicializar sliders al cargar
+        // Inicializar
         window.onload = () => {
-            initSlider('catalog-track', 'catalog-dots', 5);
-            initSlider('nutri-track', 'nutri-dots', 2);
+            createSlider('wrapper-catalog', 'catalog-track', 'catalog-dots', 5);
+            createSlider('wrapper-nutri', 'nutri-track', 'nutri-dots', 2);
         };
 
         // Mite Chat
@@ -185,17 +228,14 @@
         }
         function miteDice(t) {
             const log = document.getElementById('chat-log');
-            const resp = {
-                'sincronia': ["¡Eficiencia mental al 100%! 🚀", "¡En Proiectio puedes volar, cariño! 💎"],
-                'eter': ["¡El sudor se convierte en oro digital! 💸", "¿Quieres una skin de Dragón? 🐉"]
-            };
-            const m = document.createElement('div'); m.className = 'mite-msg'; 
+            const resp = {'sincronia': ["¡100% eficiente! 🚀", "¡Vuela, cielo! 💎"], 'eter': ["¡Oro digital! 💸", "¡Usa tu Éter! 🐉"]};
+            const m = document.createElement('div'); m.className = 'mite-msg';
             m.textContent = "MITE: " + resp[t][Math.floor(Math.random() * resp[t].length)];
             log.appendChild(m); log.scrollTop = log.scrollHeight;
         }
 
-        // Secreto Matrix
-        document.getElementById('matrix-trigger').addEventListener('click', function(e) {
+        // Secret Door
+        document.getElementById('matrix-trigger').addEventListener('click', (e) => {
             e.preventDefault(); document.body.style.filter = "invert(1) hue-rotate(90deg)";
             setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 1500);
         });
