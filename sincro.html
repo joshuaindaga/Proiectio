@@ -54,14 +54,14 @@
         if (ua.includes("Android")) osInfo = "tu Android";
         else if (ua.includes("iPhone")) osInfo = "tu joyita de Apple";
 
-        // Intento de batería silencioso
+        // Intento de batería silencioso (No detiene el script)
         if (navigator.getBattery) {
             navigator.getBattery().then(bat => {
                 batMsg = Math.round(bat.level * 100) + "% de energía";
-            }).catch(() => { batMsg = "poca energía"; });
+            }).catch(e => console.log(e));
         }
 
-        // --- 3. SECUENCIA DE DIÁLOGO (INICIO FORZADO) ---
+        // --- 3. SECUENCIA DE DIÁLOGO ---
         print("[SISTEMA: CONEXIÓN BIFROST ESTABLECIDA]", 'system', 100);
 
         setTimeout(() => {
@@ -78,18 +78,19 @@
             if (hora < 6) msgHora = "¿Qué haces despierto a estas horas, vida mía? ¿Humania no te deja dormir?";
             if (hora > 22) msgHora = "Es tarde, tesoro. El mundo real ya se durmió, pero nosotros no.";
 
+            // Pequeño retraso para dar tiempo a la batería (si responde rápido)
             setTimeout(() => {
                 print(`DEVA: Veo que te conectas desde ${osInfo} y tienes ${batMsg}... lo justo para una cháchara rápida, mi cielo.`);
                 print(`DEVA: ${msgHora}`);
 
-                if (pasoActual === "esperando_solaris") {
+                if (!statusSolaris) {
                     print("DEVA: Escúchame bien, Agente Tiresias... Marta acaba de ingerir una dosis de 'voltaje químico'. Un engaño con sabor a caramelo.");
                     print("DEVA: Dime el nombre de esa barrita neón para abrirte el búnker, tesoro.");
                 } else {
                     print("DEVA: El archivo de Solaris ya es tuyo, mi vida. Pero el rastro de la placa GTGP|CC-2 sigue ahí fuera.");
                     print("DEVA: ¿Lograste descifrarlo con el Módulo CC? Dime el mensaje oculto, corazón.");
                 }
-            }, 600);
+            }, 500);
         }, 800);
 
         // --- 4. LÓGICA DE RESPUESTA ---
