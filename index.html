@@ -6,6 +6,19 @@
     <title>PROIECTIO | El Futuro del Sueño</title>
     <!-- CEREBRO DE ESTILOS -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- ESTILOS ESPECÍFICOS PARA EL EVENTO (Juegos Etéricos) -->
+    <style>
+        .event-banner { position: relative; padding: 80px 20px; text-align: center; color: white; overflow: hidden; margin-top: 40px; box-shadow: inset 0 0 100px #000; }
+        .event-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('multimedia/coliseo.png') center/cover; z-index: -2; filter: blur(2px); }
+        .event-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: -1; }
+        .live-badge { font-size: 0.7rem; color: #00c3ff; border: 1px solid #00c3ff; display: inline-block; padding: 4px 12px; border-radius: 20px; margin-bottom: 20px; font-weight: bold; letter-spacing: 2px; animation: pulse 2s infinite; }
+        .countdown { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
+        .time-box { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; min-width: 70px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); }
+        .btn-event { padding: 15px 50px; background: linear-gradient(90deg, #00c3ff, #005f73); color: white; border: none; font-size: 0.9rem; font-weight: bold; letter-spacing: 2px; cursor: pointer; box-shadow: 0 0 20px rgba(0,195,255,0.4); transition: 0.3s; margin-top: 20px; }
+        .btn-event:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(0,195,255,0.6); }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+    </style>
 </head>
 <body id="main-body">
 
@@ -13,7 +26,7 @@
     <div id="header-placeholder"></div>
 
     <!-- 1. HERO -->
-    <section class="parallax-section" style="background-image: url('multimedia/hero.jpg');">
+    <section class="parallax-section" style="background-image: url('multimedia/hero.png');">
         <div class="overlay-text">
             <h1>Un Mañana Sin Sombras</h1>
             <p style="color:var(--cian); letter-spacing: 2px; font-weight:bold;">TECNOLOGÍA NEURONAL NIVEL 7</p>
@@ -21,22 +34,40 @@
     </section>
 
     <!-- 2. CATÁLOGO -->
-    <div class="section-title"><h2>Ecosistemas de Inmersión</h2></div>
+    <div class="section-title"><h2>Ecosistemas de Inmersión</h2><p>Toque un destino para sincronizar.</p></div>
     <div class="slider-wrapper" id="wrapper-catalog">
         <div class="slide-track" id="catalog-track">
-            <!-- Items (Asegúrate de que las rutas sean correctas) -->
-            <a href="olympus.html" class="slide-item"><img src="multimedia/Olympus.jpeg"><div class="label-overlay"><h3>Olympus V-Games</h3><p>Redefina su potencial.</p></div></a>
-            <a href="arcadia.html" class="slide-item"><img src="multimedia/arcadia.jpg"><div class="label-overlay"><h3>Arcadia Eterna</h3><p>La pureza original.</p></div></a>
-            <a href="beso.html" class="slide-item"><img src="multimedia/elbeso.pjg"><div class="label-overlay"><h3>El Beso Prohibido</h3><p>Donde los adioses no existen.</p></div></a>
-            <a href="neon.html" class="slide-item"><img src="multimedia/neonn.png"><div class="label-overlay"><h3>Neon Nirvana</h3><p>Placer bajo vigilancia.</p></div></a>
-            <a href="chronos.html" class="slide-item"><img src="multimedia/chr.png"><div class="label-overlay"><h3>Chronos</h3><p>La historia en su piel.</p></div></a>
-            <a href="coliseo.html" class="slide-item"><img src="multimedia/coliseo.jpg"><div class="label-overlay"><h3>Coliseo Etérico</h3><p>Forja tu leyenda.</p></div></a>
+            <a href="olympus.html" class="slide-item"><img src="multimedia/olympus.png"><div class="label-overlay"><h3>Olympus V-Games</h3><p>Redefina su potencial.</p></div></a>
+            <a href="arcadia.html" class="slide-item"><img src="multimedia/arcadia.png"><div class="label-overlay"><h3>Arcadia Eterna</h3><p>La pureza original.</p></div></a>
+            <a href="beso.html" class="slide-item"><img src="multimedia/beso.png"><div class="label-overlay"><h3>El Beso Prohibido</h3><p>Donde los adioses no existen.</p></div></a>
+            <a href="neon.html" class="slide-item"><img src="multimedia/neon.png"><div class="label-overlay"><h3>Neon Nirvana</h3><p>Placer bajo vigilancia.</p></div></a>
+            <a href="chronos.html" class="slide-item"><img src="multimedia/chronos.png"><div class="label-overlay"><h3>Chronos</h3><p>La historia en su piel.</p></div></a>
+            <a href="coliseo.html" class="slide-item"><img src="multimedia/coliseo.png"><div class="label-overlay"><h3>Coliseo Etérico</h3><p>Forja tu leyenda.</p></div></a>
         </div>
         <div class="dots-container" id="catalog-dots"></div>
     </div>
 
+    <!-- 2.5 EVENTO GLOBAL (JUEGOS ETÉRICOS) -->
+    <section class="event-banner">
+        <div class="event-bg"></div>
+        <div class="event-overlay"></div>
+        
+        <div class="live-badge">EN VIVO: TEMPORADA 47</div>
+        <h2 style="font-size: 2.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 10px; text-shadow: 0 0 20px rgba(0,195,255,0.6);">Juegos Etéricos</h2>
+        <p style="color: #ccc; max-width: 600px; margin: 0 auto 30px; font-size: 1.1rem;">La arena busca a su nuevo dios. Sincroniza tu escuadrón. Reclama la gloria.</p>
+
+        <div class="countdown">
+            <div class="time-box"><span id="d" style="font-size: 1.5rem; font-weight: bold;">04</span><br><span style="font-size: 0.6rem; color: #888;">DÍAS</span></div>
+            <div class="time-box"><span id="h" style="font-size: 1.5rem; font-weight: bold;">00</span><br><span style="font-size: 0.6rem; color: #888;">HRS</span></div>
+            <div class="time-box"><span id="m" style="font-size: 1.5rem; font-weight: bold;">00</span><br><span style="font-size: 0.6rem; color: #888;">MIN</span></div>
+            <div class="time-box"><span id="s" style="font-size: 1.5rem; font-weight: bold; color: #00c3ff;">00</span><br><span style="font-size: 0.6rem; color: #888;">SEG</span></div>
+        </div>
+
+        <button class="btn-event" onclick="window.location.href='seguridad.html'">INSCRIPCIÓN DE CLAN</button>
+    </section>
+
     <!-- 3. CICLO DE RECARGA -->
-    <div class="section-title"><h2>Ciclo de Recarga</h2></div>
+    <div class="section-title"><h2>Ciclo de Recarga</h2><p>Combustible biológico.</p></div>
     <div class="slider-wrapper" id="wrapper-nutri">
         <div class="slide-track" id="nutri-track">
             <a href="solaris.html" class="slide-item"><img src="multimedia/solaris-web.png"><div class="label-overlay"><h3>FASE DIURNA: SOLARIS</h3><p>Voltaje puro.</p></div></a>
@@ -45,7 +76,7 @@
         <div class="dots-container" id="nutri-dots"></div>
     </div>
 
-    <!-- 4. MERCADO DE FE & S.P.N. -->
+    <!-- 4. MERCADO DE FE -->
     <div class="section-title"><h2>Adquisición de FE</h2><p>Monetice su existencia.</p></div>
     <div class="fe-container">
         <div class="fe-card">
@@ -58,47 +89,37 @@
             <p>Estatus Premium.</p>
             <button class="btn-buy" style="background:var(--cian); color:#fff;" onclick="iniciarSPN()">RECARGAR FE</button>
         </div>
+        <div class="fe-card">
+            <div class="fe-price">∞ <small>FE</small></div>
+            <p>Mecenazgo Corporativo.</p>
+            <button class="btn-buy" style="opacity:0.5; cursor:not-allowed;">REQUIERE NIVEL 7</button>
+        </div>
     </div>
 
     <!-- 5. MECANICA SUEÑO -->
-    <section class="parallax-section" style="background-image: url('multimedia/sueño.jpg'); margin-top: 60px;">
+    <section class="parallax-section" style="background-image: url('multimedia/sueño.png'); margin-top: 60px;">
         <div class="overlay-text">
             <h2>Sincronía REM</h2>
             <button class="btn-buy" style="margin-top:20px; background:#000; color:#fff;" onclick="window.location.href='seguridad.html'">CONECTAR AHORA</button>
         </div>
     </section>
 
-    <!-- MODAL S.P.N. (SISTEMA DE PAGO) -->
-    <div id="spn-overlay" class="spn-overlay">
-        <div class="spn-box">
-            <div id="spn-loader">
-                <div class="pulse-ring"></div>
-                <h3 style="color:var(--cian)">S.P.N. ACTIVO</h3>
-                <p id="spn-status" style="font-family:monospace; color:#666;">Buscando firma biométrica...</p>
-            </div>
-            <div id="spn-error" style="display:none;">
-                <h3 style="color:red">FALLO DE ENLACE</h3>
-                <p style="font-size:0.8rem; margin:15px 0;">ERROR CRÍTICO [BIO-404]: No se detecta chip CNB-3. Transacción rechazada.</p>
-                <button class="btn-buy" onclick="document.getElementById('spn-overlay').style.display='none'">CERRAR</button>
-            </div>
-        </div>
-    </div>
+    <!-- MODALES -->
+    <div id="spn-overlay" class="spn-overlay"><div class="spn-box"><div class="pulse-ring"></div><h3 style="color:var(--cian)">S.P.N. ACTIVO</h3><p id="spn-status" style="font-family:monospace; color:#666;">Buscando firma biométrica...</p><div id="spn-error" style="display:none;"><h3 style="color:red">FALLO DE ENLACE</h3><p style="font-size:0.8rem; margin:15px 0;">ERROR CRÍTICO [BIO-404]: No se detecta chip CNB-3. Transacción rechazada.</p><button class="btn-buy" onclick="document.getElementById('spn-overlay').style.display='none'">CERRAR</button></div></div></div>
 
-    <!-- FOOTER & LINK MATRIX -->
+    <!-- FOOTER -->
     <footer>
         <p>&copy; 202X HUMANIA GLOBAL SYSTEMS.</p>
         <a href="#" id="matrix-trigger" class="secret-link">Error_v.0.8</a>
     </footer>
 
-    <!-- INVOCACIÓN DE MITE -->
+    <!-- SCRIPTS -->
     <script src="mite.js"></script>
-
-    <!-- SCRIPTS INTERNOS (SPN + MOTION + SLIDERS) -->
     <script>
-        // Cargar Header
+        // Header
         fetch('header.html').then(r => r.text()).then(d => document.getElementById('header-placeholder').innerHTML = d);
 
-        // Sliders Kinéticos
+        // Sliders
         function setupSlider(wrapperId, trackId, dotsId, count) {
             const wrapper = document.getElementById(wrapperId), track = document.getElementById(trackId), dotsContainer = document.getElementById(dotsId);
             let index = 0, startX = 0, currentTranslate = 0, prevTranslate = 0, isDragging = false, animationID;
@@ -120,54 +141,26 @@
         }
         window.onload = () => { setupSlider('wrapper-catalog', 'catalog-track', 'catalog-dots', 6); setupSlider('wrapper-nutri', 'nutri-track', 'nutri-dots', 2); };
 
-        // LÓGICA S.P.N. (PAGO)
-        function iniciarSPN() {
-            const overlay = document.getElementById('spn-overlay');
-            const loader = document.getElementById('spn-loader');
-            const error = document.getElementById('spn-error');
-            const status = document.getElementById('spn-status');
-            
-            overlay.style.display = 'flex';
-            loader.style.display = 'block';
-            error.style.display = 'none';
-            status.textContent = "Estableciendo enlace...";
+        // Contador Evento
+        function updateTimer() {
+            const now = new Date();
+            document.getElementById('h').innerText = 23 - now.getHours();
+            document.getElementById('m').innerText = 59 - now.getMinutes();
+            document.getElementById('s').innerText = 59 - now.getSeconds();
+        }
+        setInterval(updateTimer, 1000); updateTimer();
 
-            setTimeout(() => { status.textContent = "Validando saldo en glándula pineal..."; }, 1500);
-            
-            setTimeout(() => {
-                loader.style.display = 'none';
-                error.style.display = 'block';
-                // Mite se burla llamando a su función global
-                if (typeof window.miteResponder === "function") {
-                    window.miteResponder('eter'); 
-                }
-            }, 3000);
+        // SPN
+        function iniciarSPN() {
+            document.getElementById('spn-overlay').style.display = 'flex';
+            setTimeout(() => { document.getElementById('spn-status').style.display='none'; document.getElementById('spn-error').style.display='block'; if(typeof window.miteResponder==="function")window.miteResponder('eter'); }, 3000);
         }
 
-        // PUERTA SECRETA: MATRIX + MOVIMIENTO
-        // Destino: nodo=gemelas
-        const irATerminal = () => {
-            document.body.classList.add('matrix-collapse');
-            setTimeout(() => { window.location.href = "sincro.html?nodo=gemelas"; }, 2000);
-        };
-
-        // Click en footer
-        document.getElementById('matrix-trigger').addEventListener('click', e => {
-            e.preventDefault(); irATerminal();
-        });
-
-        // Agitar teléfono
-        let lastX, lastY, lastZ, lastUpdate = 0;
-        window.addEventListener('devicemotion', function(e) {
-            let acc = e.accelerationIncludingGravity;
-            let now = new Date().getTime();
-            if ((now - lastUpdate) > 100) {
-                let diff = now - lastUpdate; lastUpdate = now;
-                let speed = Math.abs(acc.x + acc.y + acc.z - lastX - lastY - lastZ) / diff * 10000;
-                if (speed > 2000) irATerminal();
-                lastX = acc.x; lastY = acc.y; lastZ = acc.z;
-            }
-        });
+        // Matrix
+        document.getElementById('matrix-trigger').addEventListener('click', e => { e.preventDefault(); document.body.classList.add('matrix-collapse'); setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 2000); });
+        
+        // Motion
+        let lX, lY, lZ, lU = 0; window.addEventListener('devicemotion', e => { let acc=e.accelerationIncludingGravity, now=new Date().getTime(); if((now-lU)>100) { let diff=now-lU, speed=Math.abs(acc.x+acc.y+acc.z-lX-lY-lZ)/diff*10000; if(speed>2000) window.location.href="sincro.html?nodo=motion"; lX=acc.x; lY=acc.y; lZ=acc.z; lU=now; } });
     </script>
 </body>
 </html>
