@@ -1,45 +1,84 @@
-/* --- ESTILOS MAESTROS - NEXO-CORE V1.0 --- */
-:root { --cian: #00c3ff; --blanco: #ffffff; --gris-claro: #f5f5f7; --texto: #1d1d1f; }
+/* === NEXO-CORE V2.0: ESTILOS MAESTROS === */
+:root { --cian: #00c3ff; --blanco: #ffffff; --gris-claro: #f8f9fa; --texto: #1d1d1f; }
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
 body { background-color: var(--blanco); color: var(--texto); overflow-x: hidden; user-select: none; }
 a { text-decoration: none; color: inherit; }
 
-/* -- HEADER REUTILIZABLE -- */
-header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: rgba(255,255,255,0.95); z-index: 100; backdrop-filter: blur(10px); }
-.logo { font-weight: bold; letter-spacing: 4px; color: var(--texto); font-size: 1rem; }
-.header-tag { font-size: 0.6rem; color: var(--cian); border: 1px solid var(--cian); padding: 2px 5px; font-weight: bold; }
+/* --- HEADER (AJUSTE DE LOGO) --- */
+/* Esto asegura que el logo nunca sea gigante, ni en móvil ni en PC */
+header img { height: 35px; width: auto; object-fit: contain; }
+header .logo { font-weight: bold; letter-spacing: 4px; color: var(--texto); font-size: 1rem; margin-left: 10px; }
+.header-container { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: rgba(255,255,255,0.95); z-index: 1000; backdrop-filter: blur(10px); }
 
-/* -- SLIDERS KINÉTICOS -- */
+/* --- EFECTO PARALLAX (HERO Y REM) --- */
+.parallax-section {
+    position: relative;
+    height: 70vh; /* Altura elegante */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.overlay-text { background: rgba(255,255,255,0.85); padding: 30px; text-align: center; border-radius: 4px; backdrop-filter: blur(5px); max-width: 80%; }
+.overlay-text h1 { font-weight: 200; font-size: 2.5rem; margin-bottom: 10px; }
+.overlay-text h2 { font-weight: 300; font-size: 2rem; }
+
+/* Ajuste Parallax para móviles (evita saltos) */
+@media (max-width: 768px) {
+    .parallax-section { background-attachment: scroll; height: 60vh; }
+    .overlay-text h1 { font-size: 1.8rem; }
+}
+
+/* --- SLIDERS KINÉTICOS --- */
 .slider-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; cursor: grab; }
-.slide-track { display: flex; transition: transform 0.5s ease-out; will-change: transform; }
-.slide-item { min-width: 100%; position: relative; }
-.slide-item img { width: 100%; display: block; }
-.label-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: #fff; padding: 50px 20px 30px; text-align: right; }
-.label-overlay h3 { color: var(--cian); font-size: 1.5rem; }
-.dots-container { position: absolute; bottom: 15px; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 10; }
-.dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; }
-.dot.active { background: var(--cian); }
+.slide-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
+.slide-item { min-width: 100%; position: relative; display: block; }
+.slide-item img { width: 100%; height: auto; display: block; }
 
-/* -- TÍTULOS DE SECCIÓN -- */
+.label-overlay { 
+    position: absolute; bottom: 0; left: 0; width: 100%; 
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%); 
+    color: #fff; padding: 50px 20px 25px; text-align: right; pointer-events: none; 
+}
+.label-overlay h3 { color: var(--cian); font-size: 1.4rem; margin-bottom: 3px; }
+.label-overlay p { font-size: 0.85rem; opacity: 0.9; margin-left: auto; max-width: 80%; }
+
+.dots-container { position: absolute; bottom: 10px; width: 100%; display: flex; justify-content: center; gap: 8px; z-index: 10; pointer-events: auto; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: 0.3s; }
+.dot.active { background: var(--cian); transform: scale(1.4); }
+
+/* --- TÍTULOS Y TEXTOS --- */
 .section-title { padding: 60px 20px 20px; text-align: center; }
-.section-title h2 { font-weight: 200; font-size: 2.2rem; }
+.section-title h2 { font-weight: 200; font-size: 2.2rem; letter-spacing: -1px; }
 .section-title p { color: #86868b; }
 
-/* -- MERCADO DE FE -- */
+/* --- MERCADO DE FE --- */
 .fe-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 0 20px 60px; max-width: 1000px; margin: 0 auto; }
-.fe-card { background: #fff; border: 1px solid #eee; border-radius: 20px; padding: 30px; width: 300px; text-align: center; position: relative; transition: 0.3s; }
-.fe-card.premium { border: 2px solid var(--cian); }
-.fe-header { font-size: 0.7rem; color: #999; letter-spacing: 2px; }
-.fe-price { font-size: 2.5rem; font-weight: 200; }
-.fe-price small { color: var(--cian); font-weight: bold; }
-.fe-desc { font-size: 0.8rem; color: #666; margin: 15px 0; }
-.fe-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--cian); color: #fff; font-size: 0.6rem; padding: 4px 12px; border-radius: 10px; font-weight: bold; }
-.btn-buy { width: 100%; padding: 12px; border: 1px solid #ddd; background: #fff; color: #333; font-weight: bold; border-radius: 10px; cursor: pointer; transition: 0.3s; }
-.premium-btn { background: var(--cian); color: #fff; }
+.fe-card { background: #fff; border: 1px solid #eee; border-radius: 20px; padding: 30px; width: 300px; text-align: center; transition: 0.3s; }
+.fe-card.premium { border: 2px solid var(--cian); transform: scale(1.02); }
+.fe-price { font-size: 2.5rem; font-weight: 200; margin: 15px 0; }
+.fe-price small { color: var(--cian); font-weight: bold; font-size: 1rem; }
+.btn-buy { width: 100%; padding: 12px; border: 1px solid #ddd; background: #fff; color: #333; font-weight: bold; border-radius: 10px; cursor: pointer; }
+.btn-buy:hover { background: #111; color: #fff; }
 
-/* -- FOOTER REUTILIZABLE -- */
-footer { padding: 60px 20px; text-align: center; font-size: 0.7rem; color: #aaa; border-top: 1px solid #eee; }
-.secret-link { opacity: 0.05; text-decoration: none; color: #000; }
+/* --- MODAL S.P.N. --- */
+.spn-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
+.spn-box { background: #fff; padding: 40px; border-radius: 20px; text-align: center; max-width: 350px; width: 90%; }
+.pulse-ring { width: 60px; height: 60px; border: 4px solid var(--cian); border-radius: 50%; margin: 0 auto 20px; animation: pulse 1.5s infinite; }
 
-/* -- OTRAS UTILIDADES -- */
-.matrix-collapse { filter: invert(1) hue-rotate(90deg); transition: 2s; background: #000 !important; }
+/* --- MITE CHAT --- */
+#mite-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+#mite-bubble { width: 65px; height: 65px; cursor: pointer; filter: drop-shadow(0 5px 15px rgba(0,195,255,0.3)); transition: 0.3s; }
+#chat-window { position: fixed; bottom: 95px; right: 20px; width: 280px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; border: 1px solid #eee; text-align: left; }
+.chat-header { background: var(--cian); color: white; padding: 12px; font-weight: bold; font-size: 0.8rem; display: flex; justify-content: space-between; }
+.chat-body { height: 250px; overflow-y: auto; padding: 15px; font-size: 0.8rem; color: #333; }
+.mite-msg { background: #f0f0f5; padding: 8px; border-radius: 12px 12px 12px 0; margin-bottom: 10px; }
+.opt-btn { background: #fff; border: 1px solid var(--cian); color: var(--cian); padding: 5px 10px; border-radius: 10px; font-size: 0.7rem; cursor: pointer; margin: 2px; }
+
+/* --- FOOTER & MATRIX --- */
+footer { padding: 60px 20px; text-align: center; font-size: 0.7rem; color: #aaa; border-top: 1px solid #eee; background: #fff; }
+.matrix-collapse { filter: invert(1) hue-rotate(90deg) brightness(1.2); transition: 2s; background: #000 !important; }
+@keyframes pulse { 0% { transform: scale(0.8); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(0.8); opacity: 0.5; } }
