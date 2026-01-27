@@ -13,22 +13,44 @@ header .logo { font-weight: bold; letter-spacing: 4px; color: var(--texto); font
 /* --- EFECTO PARALLAX (HERO Y REM) --- */
 .parallax-section {
     position: relative;
-    height: 70vh; /* Altura elegante */
+    height: 70vh;
     background-attachment: fixed;
-    background-position: center;
+    background-position: center top; /* Enfoca la parte de arriba (caras) */
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
-    align-items: center;
+    align-items: flex-end; /* ESTO BAJA LA CAJA AL FINAL */
     justify-content: center;
+    padding-bottom: 60px; /* Un poco de aire desde el borde inferior */
 }
-.overlay-text { background: rgba(255,255,255,0.85); padding: 30px; text-align: center; border-radius: 4px; backdrop-filter: blur(5px); max-width: 80%; }
-.overlay-text h1 { font-weight: 200; font-size: 2.5rem; margin-bottom: 10px; }
-.overlay-text h2 { font-weight: 300; font-size: 2rem; }
 
-/* Ajuste Parallax para móviles (evita saltos) */
+.overlay-text { 
+    /* Fondo mucho más transparente (Efecto Cristal) */
+    background: rgba(255, 255, 255, 0.5); 
+    padding: 25px; 
+    text-align: center; 
+    border-radius: 15px; 
+    /* El blur fuerte hace que el texto sea legible sin tapar la foto con color sólido */
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px);
+    max-width: 90%; 
+    border: 1px solid rgba(255,255,255,0.6);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Ajuste móvil */
 @media (max-width: 768px) {
-    .parallax-section { background-attachment: scroll; height: 60vh; }
+    .parallax-section { 
+        background-attachment: scroll; 
+        height: 60vh; 
+        background-position: center top;
+        align-items: flex-end;
+    }
+    .overlay-text {
+        width: 95%;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
     .overlay-text h1 { font-size: 1.8rem; }
 }
 
