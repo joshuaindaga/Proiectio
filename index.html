@@ -9,14 +9,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="main-body">
-
-    <header>
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="multimedia/proiectio-logo.png" alt="Logo" style="height: 40px; width: auto;">
-            <div class="logo">PROIECTIO&trade;</div>
-        </div>
-        <div style="font-size: 0.6rem; color: var(--cian); border: 1px solid var(--cian); padding: 2px 5px; font-weight: bold;">A.N.I.M.A. ONLINE</div>
-    </header>
+    
+    <!-- header -->
+    <div id="header-placeholder"></div>
+<script>
+    fetch('header.html')
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+        });
+</script>
 
     <!-- FASE 1: HERO -->
     <section class="hero-link">
